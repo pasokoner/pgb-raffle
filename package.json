@@ -12,7 +12,9 @@
 		"lint": "prettier --check . && eslint .",
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
-		"test:unit": "vitest"
+		"test:unit": "vitest",
+		"generate": "drizzle-kit generate:pg --schema=./src/lib/server/db/schema.ts",
+		"push": "drizzle-kit push:pg --config=./drizzle.config.ts"
 	},
 	"devDependencies": {
 		"@playwright/test": "^1.28.1",
@@ -21,6 +23,7 @@
 		"@typescript-eslint/eslint-plugin": "^6.0.0",
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.14",
+		"drizzle-kit": "^0.20.6",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -38,9 +41,14 @@
 	},
 	"type": "module",
 	"dependencies": {
+		"@lucia-auth/adapter-postgresql": "^2.0.2",
 		"bits-ui": "^0.9.8",
 		"clsx": "^2.0.0",
+		"dotenv": "^16.3.1",
+		"drizzle-orm": "^0.29.0",
+		"lucia": "^2.7.4",
 		"lucide-svelte": "^0.293.0",
+		"postgres": "^3.4.3",
 		"tailwind-merge": "^2.0.0",
 		"tailwind-variants": "^0.1.18"
 	}

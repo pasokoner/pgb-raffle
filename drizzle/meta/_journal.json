@@ -1,0 +1,27 @@
+{
+  "version": "5",
+  "dialect": "pg",
+  "entries": [
+    {
+      "idx": 0,
+      "version": "5",
+      "when": 1701140691201,
+      "tag": "0000_silly_butterfly",
+      "breakpoints": true
+    },
+    {
+      "idx": 1,
+      "version": "5",
+      "when": 1701142277224,
+      "tag": "0001_nasty_albert_cleary",
+      "breakpoints": true
+    },
+    {
+      "idx": 2,
+      "version": "5",
+      "when": 1701142423693,
+      "tag": "0002_puzzling_mephisto",
+      "breakpoints": true
+    }
+  ]
+}
