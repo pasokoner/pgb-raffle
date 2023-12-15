@@ -55,7 +55,19 @@ const config = {
 				sm: "calc(var(--radius) - 4px)"
 			},
 			fontFamily: {
-				sans: [...fontFamily.sans]
+				sans: [...fontFamily.sans],
+				star: ["Star", ...fontFamily.sans],
+				flake: ["Flake", ...fontFamily.sans],
+				flower: ["Indie Flower", ...fontFamily.sans]
+			},
+			keyframes: {
+				wiggle: {
+					"0%, 100%": { transform: "rotate(-1deg)" },
+					"50%": { transform: "rotate(1deg)" }
+				}
+			},
+			animation: {
+				wiggle: "wiggle .6s ease-in-out infinite"
 			}
 		}
 	}

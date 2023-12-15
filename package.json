@@ -13,10 +13,12 @@
 		"format": "prettier --write .",
 		"test:integration": "playwright test",
 		"test:unit": "vitest",
-		"generate": "drizzle-kit generate:pg --schema=./src/lib/server/db/schema.ts",
-		"push": "drizzle-kit push:pg --config=./drizzle.config.ts"
+		"drizzle:generate": "drizzle-kit generate:pg --schema=./src/lib/server/db/schema.ts",
+		"drizzle:push": "drizzle-kit push:pg --config=./drizzle.config.ts",
+		"drizzle:seed": "node --loader esbuild-register/loader -r esbuild-register ./src/lib/server/db/seed.ts"
 	},
 	"devDependencies": {
+		"@faker-js/faker": "^8.3.1",
 		"@playwright/test": "^1.28.1",
 		"@sveltejs/adapter-auto": "^2.0.0",
 		"@sveltejs/kit": "^1.27.4",
@@ -24,6 +26,7 @@
 		"@typescript-eslint/parser": "^6.0.0",
 		"autoprefixer": "^10.4.14",
 		"drizzle-kit": "^0.20.6",
+		"esbuild-register": "^3.5.0",
 		"eslint": "^8.28.0",
 		"eslint-config-prettier": "^9.0.0",
 		"eslint-plugin-svelte": "^2.30.0",
@@ -42,14 +45,17 @@
 	"type": "module",
 	"dependencies": {
 		"@lucia-auth/adapter-postgresql": "^2.0.2",
-		"bits-ui": "^0.9.8",
+		"bits-ui": "^0.9.9",
 		"clsx": "^2.0.0",
 		"dotenv": "^16.3.1",
 		"drizzle-orm": "^0.29.0",
 		"lucia": "^2.7.4",
 		"lucide-svelte": "^0.293.0",
 		"postgres": "^3.4.3",
+		"pure-snow.js": "^2.1.0",
 		"tailwind-merge": "^2.0.0",
-		"tailwind-variants": "^0.1.18"
+		"tailwind-variants": "^0.1.18",
+		"zod": "^3.22.4",
+		"zod-form-data": "^2.0.2"
 	}
 }
