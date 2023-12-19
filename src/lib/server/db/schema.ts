@@ -1,5 +1,5 @@
 import { relations, type InferSelectModel } from "drizzle-orm";
-import { pgTable, bigint, varchar, text, uuid, timestamp, integer } from "drizzle-orm/pg-core";
+import { pgTable, bigint, varchar, text, uuid, timestamp, integer, boolean } from "drizzle-orm/pg-core";
 
 export const user = pgTable("auth_user", {
 	id: varchar("id", {
@@ -53,6 +53,7 @@ export const departmentsRelations = relations(departments, ({ many }) => ({
 export const employees = pgTable("employees", {
 	id: uuid("id").defaultRandom().primaryKey().notNull(),
 	name: text("name").notNull(),
+	onDuty: boolean("on-duty").notNull().default(false),
 	departmentId: uuid("department_id").references(() => departments.id),
 	minorPrizeId: uuid("minor_prize_id").references(() => minorPrizes.id, { onDelete: "set null" }),
 	majorPrizeId: uuid("major_prize_id").references(() => majorPrizes.id, { onDelete: "set null" })

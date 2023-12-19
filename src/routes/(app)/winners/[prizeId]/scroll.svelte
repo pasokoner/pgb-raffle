@@ -1,11 +1,11 @@
 <script lang="ts">
-	import AltShortcut from "$lib/components/alt-shortcut.svelte";
 	import { onMount } from "svelte";
 	import { fade, fly } from "svelte/transition";
 
 	export let winners: {
 		employees: {
 			name: string;
+			onDuty: boolean;
 		} | null;
 		departments: {
 			name: string;
@@ -47,7 +47,7 @@
 		intervalId = setInterval(scrollFunction, interval);
 	}
 
-	function toggleScrolling() {
+	export const toggleScrolling = () => {
 		if (intervalId) {
 			clearInterval(intervalId);
 			intervalId = undefined;
@@ -55,17 +55,10 @@
 		}
 
 		scrollElementEveryMillisecond();
-	}
+	};
 
 	onMount(() => scrollElementEveryMillisecond());
 </script>
-
-<AltShortcut
-	on:onPress={() => {
-		toggleScrolling();
-	}}
-	key="2"
-/>
 
 <img
 	src="/santas-list.png"
@@ -88,6 +81,7 @@
 		<div class="w-full grid grid-cols-2 text-4xl">
 			<div>
 				{winner.employees?.name}
+				{winner.employees?.onDuty ? " (DUTY)" : ""}
 			</div>
 			<div>
 				{winner.departments?.name}

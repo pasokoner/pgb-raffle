@@ -5,10 +5,11 @@
 	import AltShortcut from "$lib/components/alt-shortcut.svelte";
 	import { Input } from "$lib/components/ui/input";
 	import Label from "$lib/components/ui/label/label.svelte";
+	import { cn } from "$lib/utils.js";
 
 	export let data;
 
-	let forms: HTMLFormElement[] = new Array(data.departments.length).fill(undefined);
+	let forms: HTMLFormElement[] = new Array(data.departments.length).fill(undefined); 
 
 	let open = false;
 </script>
@@ -30,7 +31,7 @@
 	>
 </form>
 
-<AltShortcut bind:open key="1" />
+<AltShortcut bind:open key="s" />
 
 <Dialog.Root bind:open>
 	<Dialog.Content class="flex flex-col max-h-[90%] h-full max-w-xl overflow-hidden overflow-y-auto">
@@ -52,12 +53,20 @@
 						};
 					}}
 				>
-					<Label for="threshold" class="col-span-10">{d.name}</Label>
+					<Label for="threshold" class="col-span-10 flex flex-col"
+						>{d.name}
+						<div class="text-xs text-gray-500">
+							Employee: {d.employees.length}
+						</div>
+					</Label>
 					<Input
 						type="number"
 						name="threshold"
 						value={d.threshold}
-						class="col-span-2"
+						class={cn(
+							"col-span-2",
+							d.threshold > d.employees.length ? "border-red-500 border-2 text-red-500" : ""
+						)}
 						on:change={() => {
 							forms[i].requestSubmit();
 						}}

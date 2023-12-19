@@ -15,6 +15,7 @@ export const load = async ({ params }) => {
 		.fullJoin(departments, eq(departments.id, employees.departmentId))
 		.where(eq(employees.minorPrizeId, params.prizeId));
 
+
 	return {
 		winners: [...majorWinners, ...minorWinners]
 	};

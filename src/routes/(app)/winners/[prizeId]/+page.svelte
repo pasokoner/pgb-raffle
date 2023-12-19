@@ -1,11 +1,13 @@
 <script lang="ts">
 	import { fly } from "svelte/transition";
 	import Scroll from "./scroll.svelte";
+	import AltShortcut from "$lib/components/alt-shortcut.svelte";
 
 	export let data;
 
 	export let open = false;
 
+	let toggleScrollingChild: () => void;
 	let topBoxVisible = !true;
 	let bottomVisible = !true;
 
@@ -19,7 +21,15 @@
 			}, 1000);
 		}
 	}
+
 </script>
+
+<AltShortcut
+	on:onPress={() => {
+		toggleScrollingChild();
+	}}
+	key="t"
+/>
 
 <div
 	role="button"
@@ -69,6 +79,6 @@
 		</div>
 	{/if}
 	{#if open}
-		<Scroll winners={data.winners} />
+		<Scroll winners={data.winners} bind:toggleScrolling={toggleScrollingChild} />
 	{/if}
 </div>

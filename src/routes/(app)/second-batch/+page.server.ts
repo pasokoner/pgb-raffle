@@ -2,7 +2,7 @@ import { db } from "$lib/server/db";
 import { departments, employees, majorPrizes } from "$lib/server/db/schema";
 import { shuffleArray } from "$lib/utils.js";
 import { error, redirect } from "@sveltejs/kit";
-import { asc, eq, inArray } from "drizzle-orm";
+import { eq, inArray } from "drizzle-orm";
 import { z } from "zod";
 import { zfd } from "zod-form-data";
 
@@ -16,7 +16,16 @@ const drawSchema = zfd.formData({
 });
 
 export const load = async () => {
-	const data = await db.select().from(departments).orderBy(asc(departments.name));
+	const data = await db.query.departments.findMany({
+		with: {
+			employees: {
+				where(employee, { isNull }) {
+					return isNull(employee.majorPrizeId);
+				}
+			}
+		},
+		orderBy: (departments, { asc }) => asc(departments.name)
+	});
 
 	return {
 		departments: data

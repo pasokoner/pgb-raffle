@@ -11,7 +11,7 @@
 	let open = false;
 </script>
 
-<AltShortcut bind:open key="1" />
+<AltShortcut bind:open key="s" />
 
 <Sheet.Root bind:open>
 	<Sheet.Content side="right">

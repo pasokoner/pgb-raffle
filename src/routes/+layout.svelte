@@ -1,7 +1,14 @@
 <script lang="ts">
 	import { goto } from "$app/navigation";
 	import AltShortcut from "$lib/components/alt-shortcut.svelte";
+	import * as Dialog from "$lib/components/ui/dialog"
 	import "../app.pcss";
+	import DataTable from "./data-table.svelte";
+
+	export let data
+
+	let openEmployeeTable = false;
+
 </script>
 
 <svelte:head>
@@ -40,27 +47,45 @@
 	on:onPress={() => {
 		goto("/first-batch");
 	}}
-	key="q"
+	key="1"
 />
 <AltShortcut
 	on:onPress={() => {
 		goto("/second-batch");
 	}}
-	key="w"
+	key="2"
 />
 <AltShortcut
 	on:onPress={() => {
 		goto("/third-batch/major");
 	}}
-	key="e"
+	key="3"
 />
 
 <AltShortcut
 	on:onPress={() => {
 		goto("/third-batch/minor");
 	}}
-	key="r"
+	key="4"
 />
+
+<AltShortcut
+	on:onPress={() => {
+		openEmployeeTable = !openEmployeeTable
+	}}
+	key="e"
+/>
+
+<Dialog.Root bind:open={openEmployeeTable}>
+	<Dialog.Content class="flex flex-col max-h-[90%] h-full max-w-5xl overflow-hidden overflow-y-auto">
+		<Dialog.Header>
+			<Dialog.Title>Employees</Dialog.Title>
+		</Dialog.Header>
+		
+		<DataTable data={data.employees}/>
+	</Dialog.Content>
+</Dialog.Root>
+
 
 <div class="bg-[#fff5e7] h-full w-full relative overflow-hidden flex flex-col items-center">
 	<!-- CHRISTMAS LIGHTS -->
@@ -121,13 +146,6 @@
 		alt="christmas header"
 		class="absolute h-[500px] -scale-x-100 -scale-y-100 -bottom-5 left-0"
 	/>
-	<!-- CRISTMAS STARS -->
 
-	<!-- <img src="/christmas-dwarf.webp" alt="christmas dwarf" class="absolute h-64 bottom-28 left-20" />
-	<img
-		src="/christmas-reindeer.webp"
-		alt="christmas reindeer"
-		class="absolute h-64 bottom-28 right-20"
-	/> -->
 	<slot />
 </div>
