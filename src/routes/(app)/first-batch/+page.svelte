@@ -10,6 +10,8 @@
 	import { fade } from "svelte/transition";
 
 	import { purgeCount } from "./settings";
+	import AltShortcut from "$lib/components/alt-shortcut.svelte";
+	import { goto } from "$app/navigation";
 
 	export let data;
 
@@ -80,6 +82,10 @@
 		};
 	};
 </script>
+
+<AltShortcut key="w" on:onPress={() => {
+	goto("/first-batch/winners")
+}}/>
 
 <div class="relative mt-12 max-w-[80%] max-h-[80%] w-full h-full bg-[#F7EFE5]">
 	<div

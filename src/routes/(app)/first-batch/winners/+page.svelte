@@ -8,11 +8,10 @@
 	board = [...board.slice(0, data.count - data.winners.length), ...data.winners];
 </script>
 
-<div class="flex flex-col items-center justify-center w-full h-full relative z-50">
+<div class="flex flex-col items-center justify-center w-full h-full relative z-50" transition:fade={{ duration: 1500 }}>
 	<img
 		src="/santas-list.png"
 		alt="santa-list"
-		transition:fade={{ duration: 1500 }}
 		class="absolute h-[100%] w-[90%]"
 	/>
 	<div class="z-10 font-flower w-[47%] mt-10 font-bold mb-6">
