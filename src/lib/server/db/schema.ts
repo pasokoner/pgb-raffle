@@ -1,43 +1,5 @@
 import { relations, type InferSelectModel } from "drizzle-orm";
-import { pgTable, bigint, varchar, text, uuid, timestamp, integer, boolean } from "drizzle-orm/pg-core";
-
-export const user = pgTable("auth_user", {
-	id: varchar("id", {
-		length: 15 // change this when using custom user ids
-	}).primaryKey(),
-	username: varchar("username", { length: 16 }).unique().notNull()
-});
-
-export const session = pgTable("user_session", {
-	id: varchar("id", {
-		length: 128
-	}).primaryKey(),
-	userId: varchar("user_id", {
-		length: 15
-	})
-		.notNull()
-		.references(() => user.id),
-	activeExpires: bigint("active_expires", {
-		mode: "number"
-	}).notNull(),
-	idleExpires: bigint("idle_expires", {
-		mode: "number"
-	}).notNull()
-});
-
-export const key = pgTable("user_key", {
-	id: varchar("id", {
-		length: 255
-	}).primaryKey(),
-	userId: varchar("user_id", {
-		length: 15
-	})
-		.notNull()
-		.references(() => user.id),
-	hashedPassword: varchar("hashed_password", {
-		length: 255
-	})
-});
+import { pgTable, text, uuid, timestamp, integer, boolean } from "drizzle-orm/pg-core";
 
 export const departments = pgTable("departments", {
 	id: uuid("id").defaultRandom().primaryKey().notNull(),
@@ -53,7 +15,8 @@ export const departmentsRelations = relations(departments, ({ many }) => ({
 export const employees = pgTable("employees", {
 	id: uuid("id").defaultRandom().primaryKey().notNull(),
 	name: text("name").notNull(),
-	onDuty: boolean("on-duty").notNull().default(false),
+	office: text("office").notNull(),
+	onDuty: boolean("on_duty").notNull().default(false),
 	departmentId: uuid("department_id").references(() => departments.id),
 	minorPrizeId: uuid("minor_prize_id").references(() => minorPrizes.id, { onDelete: "set null" }),
 	majorPrizeId: uuid("major_prize_id").references(() => majorPrizes.id, { onDelete: "set null" })

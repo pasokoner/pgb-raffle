@@ -2,20 +2,11 @@
 // for information about these interfaces
 declare global {
 	namespace App {
-		interface Locals {
-			auth: import("lucia").AuthRequest;
-		}
-	}
-}
-
-/// <reference types="lucia" />
-declare global {
-	namespace Lucia {
-		type Auth = import("$lib/server/lucia.ts").Auth;
-		type DatabaseUserAttributes = {
-			username: string;
-		};
-		type DatabaseSessionAttributes = Record<string, never>;
+		// interface Error {}
+		// interface Locals {}
+		// interface PageData {}
+		// interface PageState {}
+		// interface Platform {}
 	}
 }
 
